@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# Install with: make install-hooks
+root="$(git rev-parse --show-toplevel)"
+exec bash "$root/scripts/check_attribution.sh" msg "$1"

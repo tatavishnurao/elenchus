@@ -1,0 +1,25 @@
+# python
+__pycache__/
+*.py[cod]
+.venv/
+.pytest_cache/
+.ruff_cache/
+*.egg-info/
+
+# generated at run time
+out/
+*.db
+*.db-journal
+test-results/
+playwright-report/
+
+# editor and os
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# agent config (bracket globs so the attribution scan does not match this file)
+.cl[a]ude/
+CL[A]UDE.md
+.pi/
