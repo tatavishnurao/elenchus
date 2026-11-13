@@ -1,0 +1,2329 @@
+[
+  {
+    "id": "W-1001",
+    "source_ref": "WEB-122592",
+    "customer": {
+      "name": "Northwind Outfitters"
+    },
+    "notes": "",
+    "lines": [
+      {
+        "sku": "A1010",
+        "color": "Black",
+        "sizes": {
+          "S": 0,
+          "M": 0,
+          "L": 0,
+          "XL": 13,
+          "2XL": 0
+        },
+        "quantity": 13,
+        "unit_price": "41.50"
+      }
+    ],
+    "tags": [
+      "zero_sizes",
+      "odd_total",
+      "duplicate_name_customer"
+    ],
+    "storefront": "web-austin"
+  },
+  {
+    "id": "W-1002",
+    "source_ref": "WEB-963084",
+    "customer": {
+      "name": "Copperline Electric"
+    },
+    "notes": "Call before delivery",
+    "lines": [
+      {
+        "sku": "A1002",
+        "color": "Navy",
+        "sizes": {
+          "S": 0,
+          "M": 0,
+          "L": 7,
+          "XL": 0,
+          "2XL": 0
+        },
+        "quantity": 7,
+        "unit_price": "13.50"
+      }
+    ],
+    "tags": [
+      "zero_sizes",
+      "odd_total"
+    ],
+    "storefront": "web-tucson"
+  },
+  {
+    "id": "W-1003",
+    "source_ref": "WEB-673443",
+    "customer": {
+      "name": "Lakeside Brewing Co"
+    },
+    "notes": "",
+    "lines": [
+      {
+        "sku": "A1009",
+        "color": "Navy",
+        "sizes": {
+          "S": 1,
+          "M": 4,
+          "L": 0,
+          "XL": 0,
+          "2XL": 0
+        },
+        "quantity": 5,
+        "unit_price": "38.00"
+      },
+      {
+        "sku": "A1009",
+        "color": "Red",
+        "sizes": {
+          "S": 0,
+          "M": 0,
+          "L": 7,
+          "XL": 0,
+          "2XL": 0
+        },
+        "quantity": 7,
+        "unit_price": "38.00"
+      }
+    ],
+    "tags": [
+      "duplicate_sku",
+      "zero_sizes",
+      "odd_total",
+      "multi_line"
+    ],
+    "storefront": "web-madison"
+  },
+  {
+    "id": "W-1004",
+    "source_ref": "WEB-146634",
+    "customer": {
+      "name": "Granite State Roofing"
+    },
+    "notes": "Rush",
+    "lines": [
+      {
+        "sku": "B1004",
+        "color": "Forest Green",
+        "sizes": {
+          "S": 11,
+          "M": 0,
+          "L": 0,
+          "XL": 7,
+          "2XL": 0
+        },
+        "quantity": 18,
+        "unit_price": "26.50"
+      },
+      {
+        "sku": "A1001",
+        "color": "Forest Green",
+        "sizes": {
+          "S": 0,
+          "M": 0,
+          "L": 10,
+          "XL": 3,
+          "2XL": 0
+        },
+        "quantity": 13,
+        "unit_price": "10.00"
+      }
+    ],
+    "tags": [
+      "zero_sizes",
+      "odd_total",
+      "multi_line"
+    ],
+    "storefront": "web-concord"
+  },
+  {
+    "id": "W-1005",
+    "source_ref": "WEB-509494",
+    "customer": {
+      "name": "Pinecrest Athletics"
+    },
+    "notes": "Call before delivery",
+    "lines": [
+      {
+        "sku": "A1002",
+        "color": "White",
+        "sizes": {
+          "S": 12,
+          "M": 5,
+          "L": 0,
+          "XL": 0,
+          "2XL": 0
+        },
+        "quantity": 17,
+        "unit_price": "13.50"
+      }
+    ],
+    "tags": [
+      "zero_sizes",
+      "odd_total",
+      "duplicate_name_customer"
+    ],
+    "storefront": "web-boise"
+  },
+  {
+    "id": "W-1006",
+    "source_ref": "WEB-213849",
+    "customer": {
+      "name": "Blue Heron Press"
+    },
+    "notes": "Gift wrap",
+    "lines": [
+      {
+        "sku": "B1007",
+        "color": "Black",
+        "sizes": {
+          "S": 6,
+          "M": 0,
+          "L": 0,
+          "XL": 5,
+          "2XL": 9
+        },
+        "quantity": 20,
+        "unit_price": "37.00"
+      }
+    ],
+    "tags": [
+      "zero_sizes"
+    ],
+    "storefront": "web-seattle"
+  },
+  {
+    "id": "W-1007",
+    "source_ref": "WEB-594296",
+    "customer": {
+      "name": "Northwind Outfitters"
+    },
+    "notes": "",
+    "lines": [
+      {
+        "sku": "B1007",
+        "color": "Forest Green",
+        "sizes": {
+          "S": 0,
+          "M": 4,
+          "L": 0,
+          "XL": 12,
+          "2XL": 6
+        },
+        "quantity": 22,
+        "unit_price": "37.00"
+      }
+    ],
+    "tags": [
+      "zero_sizes",
+      "duplicate_name_customer"
+    ],
+    "storefront": "web-austin"
+  },
+  {
+    "id": "W-1008",
+    "source_ref": "WEB-187397",
+    "customer": {
+      "name": "Maple & Vine Cafe"
+    },
+    "notes": "Call before delivery",
+    "lines": [
+      {
+        "sku": "B1007",
+        "color": "Navy",
+        "sizes": {
+          "S": 6,
+          "M": 10,
+          "L": 0,
+          "XL": 0,
+          "2XL": 0
+        },
+        "quantity": 16,
+        "unit_price": "37.00"
+      },
+      {
+        "sku": "A1005",
+        "color": "Navy",
+        "sizes": {
+          "S": 9,
+          "M": 7,
+          "L": 0,
+          "XL": 11,
+          "2XL": 0
+        },
+        "quantity": 27,
+        "unit_price": "24.00"
+      }
+    ],
+    "tags": [
+      "zero_sizes",
+      "odd_total",
+      "multi_line"
+    ],
+    "storefront": "web-burlington"
+  },
+  {
+    "id": "W-1009",
+    "source_ref": "WEB-144939",
+    "customer": {
+      "name": "Maple & Vine Cafe"
+    },
+    "notes": "",
+    "lines": [
+      {
+        "sku": "A1003",
+        "color": "Heather Grey",
+        "sizes": {
+          "S": 0,
+          "M": 12,
+          "L": 0,
+          "XL": 0,
+          "2XL": 5
+        },
+        "quantity": 17,
+        "unit_price": "17.00"
+      },
+      {
+        "sku": "A1003",
+        "color": "Heather Grey",
+        "sizes": {
+          "S": 11,
+          "M": 0,
+          "L": 0,
+          "XL": 0,
+          "2XL": 6
+        },
+        "quantity": 17,
+        "unit_price": "17.00"
+      }
+    ],
+    "tags": [
+      "duplicate_sku",
+      "zero_sizes",
+      "odd_total",
+      "multi_line"
+    ],
+    "storefront": "web-burlington"
+  },
+  {
+    "id": "W-1010",
+    "source_ref": "WEB-173692",
+    "customer": {
+      "name": "Northwind Outfitters"
+    },
+    "notes": "",
+    "lines": [
+      {
+        "sku": "A1010",
+        "color": "Navy",
+        "sizes": {
+          "S": 0,
+          "M": 5,
+          "L": 0,
+          "XL": 1,
+          "2XL": 0
+        },
+        "quantity": 6,
+        "unit_price": "41.50"
+      },
+      {
+        "sku": "A1009",
+        "color": "White",
+        "sizes": {
+          "S": 0,
+          "M": 0,
+          "L": 0,
+          "XL": 2,
+          "2XL": 0
+        },
+        "quantity": 2,
+        "unit_price": "38.00"
+      },
+      {
+        "sku": "A1008",
+        "color": "Forest Green",
+        "sizes": {
+          "S": 4,
+          "M": 0,
+          "L": 0,
+          "XL": 0,
+          "2XL": 11
+        },
+        "quantity": 15,
+        "unit_price": "34.50"
+      }
+    ],
+    "tags": [
+      "zero_sizes",
+      "odd_total",
+      "duplicate_name_customer",
+      "multi_line"
+    ],
+    "storefront": "web-austin"
+  },
+  {
+    "id": "W-1011",
+    "source_ref": "WEB-457454",
+    "customer": {
+      "name": "Blue Heron Press"
+    },
+    "notes": "",
+    "lines": [
+      {
+        "sku": "A1003",
+        "color": "Black",
+        "sizes": {
+          "S": 4,
+          "M": 0,
+          "L": 0,
+          "XL": 9,
+          "2XL": 6
+        },
+        "quantity": 19,
+        "unit_price": "17.00"
+      }
+    ],
+    "tags": [
+      "zero_sizes",
+      "odd_total"
+    ],
+    "storefront": "web-seattle"
+  },
+  {
+    "id": "W-1012",
+    "source_ref": "WEB-612875",
+    "customer": {
+      "name": "Maple & Vine Cafe"
+    },
+    "notes": "",
+    "lines": [
+      {
+        "sku": "A1003",
+        "color": "Black",
+        "sizes": {
+          "S": 0,
+          "M": 0,
+          "L": 0,
+          "XL": 0,
+          "2XL": 12
+        },
+        "quantity": 12,
+        "unit_price": "17.00"
+      }
+    ],
+    "tags": [
+      "zero_sizes"
+    ],
+    "storefront": "web-burlington"
+  },
+  {
+    "id": "W-1013",
+    "source_ref": "WEB-994962",
+    "customer": {
+      "name": "Northwind Outfitters"
+    },
+    "notes": "",
+    "lines": [
+      {
+        "sku": "B1006",
+        "color": "Forest Green",
+        "sizes": {
+          "S": 7,
+          "M": 5,
+          "L": 2,
+          "XL": 0,
+          "2XL": 0
+        },
+        "quantity": 14,
+        "unit_price": "33.50"
+      },
+      {
+        "sku": "B1006",
+        "color": "Red",
+        "sizes": {
+          "S": 4,
+          "M": 0,
+          "L": 7,
+          "XL": 0,
+          "2XL": 2
+        },
+        "quantity": 13,
+        "unit_price": "33.50"
+      }
+    ],
+    "tags": [
+      "duplicate_sku",
+      "zero_sizes",
+      "odd_total",
+      "duplicate_name_customer",
+      "multi_line"
+    ],
+    "storefront": "web-denver"
+  },
+  {
+    "id": "W-1014",
+    "source_ref": "WEB-663123",
+    "customer": {
+      "name": "Northwind Outfitters"
+    },
+    "notes": "Gift wrap",
+    "lines": [
+      {
+        "sku": "B1006",
+        "color": "Black",
+        "sizes": {
+          "S": 0,
+          "M": 0,
+          "L": 11,
+          "XL": 0,
+          "2XL": 0
+        },
+        "quantity": 11,
+        "unit_price": "33.50"
+      },
+      {
+        "sku": "B1010",
+        "color": "White",
+        "sizes": {
+          "S": 8,
+          "M": 0,
+          "L": 3,
+          "XL": 6,
+          "2XL": 0
+        },
+        "quantity": 17,
+        "unit_price": "47.50"
+      }
+    ],
+    "tags": [
+      "zero_sizes",
+      "odd_total",
+      "duplicate_name_customer",
+      "multi_line"
+    ],
+    "storefront": "web-denver"
+  },
+  {
+    "id": "W-1015",
+    "source_ref": "WEB-314885",
+    "customer": {
+      "name": "Maple & Vine Cafe"
+    },
+    "notes": "Ship together",
+    "lines": [
+      {
+        "sku": "B1002",
+        "color": "Navy",
+        "sizes": {
+          "S": 6,
+          "M": 0,
+          "L": 10,
+          "XL": 1,
+          "2XL": 0
+        },
+        "quantity": 17,
+        "unit_price": "19.50"
+      },
+      {
+        "sku": "B1002",
+        "color": "Navy",
+        "sizes": {
+          "S": 11,
+          "M": 7,
+          "L": 0,
+          "XL": 7,
+          "2XL": 0
+        },
+        "quantity": 25,
+        "unit_price": "19.50"
+      }
+    ],
+    "tags": [
+      "duplicate_sku",
+      "zero_sizes",
+      "odd_total",
+      "multi_line"
+    ],
+    "storefront": "web-burlington"
+  },
+  {
+    "id": "W-1016",
+    "source_ref": "WEB-247757",
+    "customer": {
+      "name": "Blue Heron Press"
+    },
+    "notes": "",
+    "lines": [
+      {
+        "sku": "A1002",
+        "color": "Heather Grey",
+        "sizes": {
+          "S": 0,
+          "M": 0,
+          "L": 0,
+          "XL": 10,
+          "2XL": 0
+        },
+        "quantity": 10,
+        "unit_price": "13.50"
+      },
+      {
+        "sku": "B1010",
+        "color": "Forest Green",
+        "sizes": {
+          "S": 2,
+          "M": 12,
+          "L": 0,
+          "XL": 6,
+          "2XL": 0
+        },
+        "quantity": 20,
+        "unit_price": "47.50"
+      }
+    ],
+    "tags": [
+      "zero_sizes",
+      "multi_line"
+    ],
+    "storefront": "web-seattle"
+  },
+  {
+    "id": "W-1017",
+    "source_ref": "WEB-428699",
+    "customer": {
+      "name": "Pinecrest Athletics"
+    },
+    "notes": "",
+    "lines": [
+      {
+        "sku": "B1003",
+        "color": "Heather Grey",
+        "sizes": {
+          "S": 5,
+          "M": 2,
+          "L": 0,
+          "XL": 0,
+          "2XL": 0
+        },
+        "quantity": 7,
+        "unit_price": "23.00"
+      },
+      {
+        "sku": "B1006",
+        "color": "White",
+        "sizes": {
+          "S": 0,
+          "M": 0,
+          "L": 0,
+          "XL": 1,
+          "2XL": 0
+        },
+        "quantity": 1,
+        "unit_price": "33.50"
+      }
+    ],
+    "tags": [
+      "zero_sizes",
+      "odd_total",
+      "duplicate_name_customer",
+      "multi_line"
+    ],
+    "storefront": "web-boise"
+  },
+  {
+    "id": "W-1018",
+    "source_ref": "WEB-840532",
+    "customer": {
+      "name": "Northwind Outfitters"
+    },
+    "notes": "Rush",
+    "lines": [
+      {
+        "sku": "B1004",
+        "color": "Navy",
+        "sizes": {
+          "S": 0,
+          "M": 0,
+          "L": 2,
+          "XL": 5,
+          "2XL": 8
+        },
+        "quantity": 15,
+        "unit_price": "26.50"
+      }
+    ],
+    "tags": [
+      "zero_sizes",
+      "odd_total",
+      "duplicate_name_customer"
+    ],
+    "storefront": "web-denver"
+  },
+  {
+    "id": "W-1019",
+    "source_ref": "WEB-530344",
+    "customer": {
+      "name": "Redwood Dental Group"
+    },
+    "notes": "Gift wrap",
+    "lines": [
+      {
+        "sku": "B1005",
+        "color": "Black",
+        "sizes": {
+          "S": 0,
+          "M": 10,
+          "L": 11,
+          "XL": 0,
+          "2XL": 11
+        },
+        "quantity": 32,
+        "unit_price": "30.00"
+      },
+      {
+        "sku": "B1007",
+        "color": "Heather Grey",
+        "sizes": {
+          "S": 0,
+          "M": 0,
+          "L": 10,
+          "XL": 0,
+          "2XL": 5
+        },
+        "quantity": 15,
+        "unit_price": "37.00"
+      }
+    ],
+    "tags": [
+      "zero_sizes",
+      "odd_total",
+      "multi_line"
+    ],
+    "storefront": "web-sacramento"
+  },
+  {
+    "id": "W-1020",
+    "source_ref": "WEB-216072",
+    "customer": {
+      "name": "Northwind Outfitters"
+    },
+    "notes": "",
+    "lines": [
+      {
+        "sku": "B1008",
+        "color": "Black",
+        "sizes": {
+          "S": 0,
+          "M": 2,
+          "L": 0,
+          "XL": 0,
+          "2XL": 0
+        },
+        "quantity": 2,
+        "unit_price": "40.50"
+      }
+    ],
+    "tags": [
+      "zero_sizes",
+      "duplicate_name_customer"
+    ],
+    "storefront": "web-denver"
+  },
+  {
+    "id": "W-1021",
+    "source_ref": "WEB-923213",
+    "customer": {
+      "name": "Blue Heron Press"
+    },
+    "notes": "",
+    "lines": [
+      {
+        "sku": "B1002",
+        "color": "Black",
+        "sizes": {
+          "S": 4,
+          "M": 5,
+          "L": 0,
+          "XL": 12,
+          "2XL": 0
+        },
+        "quantity": 21,
+        "unit_price": "19.50"
+      },
+      {
+        "sku": "B1002",
+        "color": "White",
+        "sizes": {
+          "S": 5,
+          "M": 3,
+          "L": 3,
+          "XL": 0,
+          "2XL": 0
+        },
+        "quantity": 11,
+        "unit_price": "19.50"
+      }
+    ],
+    "tags": [
+      "duplicate_sku",
+      "zero_sizes",
+      "odd_total",
+      "multi_line"
+    ],
+    "storefront": "web-seattle"
+  },
+  {
+    "id": "W-1022",
+    "source_ref": "WEB-798246",
+    "customer": {
+      "name": "Summit Trail Guides"
+    },
+    "notes": "",
+    "lines": [
+      {
+        "sku": "B1006",
+        "color": "Heather Grey",
+        "sizes": {
+          "S": 10,
+          "M": 0,
+          "L": 6,
+          "XL": 0,
+          "2XL": 2
+        },
+        "quantity": 18,
+        "unit_price": "33.50"
+      }
+    ],
+    "tags": [
+      "zero_sizes"
+    ],
+    "storefront": "web-salt-lake-city"
+  },
+  {
+    "id": "W-1023",
+    "source_ref": "WEB-730822",
+    "customer": {
+      "name": "Blue Heron Press"
+    },
+    "notes": "",
+    "lines": [
+      {
+        "sku": "B1004",
+        "color": "Heather Grey",
+        "sizes": {
+          "S": 7,
+          "M": 1,
+          "L": 0,
+          "XL": 10,
+          "2XL": 0
+        },
+        "quantity": 18,
+        "unit_price": "26.50"
+      }
+    ],
+    "tags": [
+      "zero_sizes"
+    ],
+    "storefront": "web-seattle"
+  },
+  {
+    "id": "W-1024",
+    "source_ref": "WEB-650180",
+    "customer": {
+      "name": "Summit Trail Guides"
+    },
+    "notes": "",
+    "lines": [
+      {
+        "sku": "B1004",
+        "color": "Heather Grey",
+        "sizes": {
+          "S": 12,
+          "M": 1,
+          "L": 11,
+          "XL": 0,
+          "2XL": 0
+        },
+        "quantity": 24,
+        "unit_price": "26.50"
+      }
+    ],
+    "tags": [
+      "zero_sizes"
+    ],
+    "storefront": "web-salt-lake-city"
+  },
+  {
+    "id": "W-1025",
+    "source_ref": "WEB-235627",
+    "customer": {
+      "name": "Redwood Dental Group"
+    },
+    "notes": "",
+    "lines": [
+      {
+        "sku": "B1002",
+        "color": "Navy",
+        "sizes": {
+          "S": 0,
+          "M": 0,
+          "L": 2,
+          "XL": 2,
+          "2XL": 7
+        },
+        "quantity": 11,
+        "unit_price": "19.50"
+      },
+      {
+        "sku": "B1006",
+        "color": "Black",
+        "sizes": {
+          "S": 4,
+          "M": 7,
+          "L": 0,
+          "XL": 8,
+          "2XL": 0
+        },
+        "quantity": 19,
+        "unit_price": "33.50"
+      },
+      {
+        "sku": "A1006",
+        "color": "Black",
+        "sizes": {
+          "S": 13,
+          "M": 2,
+          "L": 0,
+          "XL": 0,
+          "2XL": 0
+        },
+        "quantity": 15,
+        "unit_price": "27.50"
+      }
+    ],
+    "tags": [
+      "zero_sizes",
+      "odd_total",
+      "multi_line"
+    ],
+    "storefront": "web-sacramento"
+  },
+  {
+    "id": "W-1026",
+    "source_ref": "WEB-218707",
+    "customer": {
+      "name": "Redwood Dental Group"
+    },
+    "notes": "",
+    "lines": [
+      {
+        "sku": "A1010",
+        "color": "Heather Grey",
+        "sizes": {
+          "S": 0,
+          "M": 0,
+          "L": 0,
+          "XL": 8,
+          "2XL": 6
+        },
+        "quantity": 14,
+        "unit_price": "41.50"
+      },
+      {
+        "sku": "A1003",
+        "color": "Black",
+        "sizes": {
+          "S": 0,
+          "M": 12,
+          "L": 12,
+          "XL": 0,
+          "2XL": 5
+        },
+        "quantity": 29,
+        "unit_price": "17.00"
+      },
+      {
+        "sku": "A1006",
+        "color": "Red",
+        "sizes": {
+          "S": 0,
+          "M": 0,
+          "L": 10,
+          "XL": 0,
+          "2XL": 0
+        },
+        "quantity": 10,
+        "unit_price": "27.50"
+      }
+    ],
+    "tags": [
+      "zero_sizes",
+      "odd_total",
+      "multi_line"
+    ],
+    "storefront": "web-sacramento"
+  },
+  {
+    "id": "W-1027",
+    "source_ref": "WEB-383486",
+    "customer": {
+      "name": "Lakeside Brewing Co"
+    },
+    "notes": "",
+    "lines": [
+      {
+        "sku": "B1010",
+        "color": "Red",
+        "sizes": {
+          "S": 11,
+          "M": 8,
+          "L": 10,
+          "XL": 0,
+          "2XL": 0
+        },
+        "quantity": 29,
+        "unit_price": "47.50"
+      },
+      {
+        "sku": "B1010",
+        "color": "Heather Grey",
+        "sizes": {
+          "S": 0,
+          "M": 1,
+          "L": 0,
+          "XL": 0,
+          "2XL": 8
+        },
+        "quantity": 9,
+        "unit_price": "47.50"
+      }
+    ],
+    "tags": [
+      "duplicate_sku",
+      "zero_sizes",
+      "odd_total",
+      "multi_line"
+    ],
+    "storefront": "web-madison"
+  },
+  {
+    "id": "W-1028",
+    "source_ref": "WEB-316906",
+    "customer": {
+      "name": "Pinecrest Athletics"
+    },
+    "notes": "Ship together",
+    "lines": [
+      {
+        "sku": "B1006",
+        "color": "Black",
+        "sizes": {
+          "S": 0,
+          "M": 9,
+          "L": 0,
+          "XL": 0,
+          "2XL": 10
+        },
+        "quantity": 19,
+        "unit_price": "33.50"
+      },
+      {
+        "sku": "A1008",
+        "color": "Forest Green",
+        "sizes": {
+          "S": 0,
+          "M": 0,
+          "L": 9,
+          "XL": 0,
+          "2XL": 0
+        },
+        "quantity": 9,
+        "unit_price": "34.50"
+      },
+      {
+        "sku": "A1008",
+        "color": "Heather Grey",
+        "sizes": {
+          "S": 0,
+          "M": 1,
+          "L": 0,
+          "XL": 4,
+          "2XL": 11
+        },
+        "quantity": 16,
+        "unit_price": "34.50"
+      }
+    ],
+    "tags": [
+      "duplicate_sku",
+      "zero_sizes",
+      "odd_total",
+      "duplicate_name_customer",
+      "multi_line"
+    ],
+    "storefront": "web-boise"
+  },
+  {
+    "id": "W-1029",
+    "source_ref": "WEB-972729",
+    "customer": {
+      "name": "Redwood Dental Group"
+    },
+    "notes": "Call before delivery",
+    "lines": [
+      {
+        "sku": "A1008",
+        "color": "Navy",
+        "sizes": {
+          "S": 12,
+          "M": 0,
+          "L": 6,
+          "XL": 9,
+          "2XL": 0
+        },
+        "quantity": 27,
+        "unit_price": "34.50"
+      },
+      {
+        "sku": "A1001",
+        "color": "Navy",
+        "sizes": {
+          "S": 0,
+          "M": 0,
+          "L": 0,
+          "XL": 5,
+          "2XL": 0
+        },
+        "quantity": 5,
+        "unit_price": "10.00"
+      }
+    ],
+    "tags": [
+      "zero_sizes",
+      "odd_total",
+      "multi_line"
+    ],
+    "storefront": "web-sacramento"
+  },
+  {
+    "id": "W-1030",
+    "source_ref": "WEB-835320",
+    "customer": {
+      "name": "Pinecrest Athletics"
+    },
+    "notes": "Call before delivery",
+    "lines": [
+      {
+        "sku": "B1009",
+        "color": "Red",
+        "sizes": {
+          "S": 7,
+          "M": 0,
+          "L": 0,
+          "XL": 0,
+          "2XL": 0
+        },
+        "quantity": 7,
+        "unit_price": "44.00"
+      },
+      {
+        "sku": "B1006",
+        "color": "Heather Grey",
+        "sizes": {
+          "S": 0,
+          "M": 0,
+          "L": 0,
+          "XL": 11,
+          "2XL": 2
+        },
+        "quantity": 13,
+        "unit_price": "33.50"
+      }
+    ],
+    "tags": [
+      "zero_sizes",
+      "odd_total",
+      "duplicate_name_customer",
+      "multi_line"
+    ],
+    "storefront": "web-spokane"
+  },
+  {
+    "id": "W-1031",
+    "source_ref": "WEB-724788",
+    "customer": {
+      "name": "Northwind Outfitters"
+    },
+    "notes": "",
+    "lines": [
+      {
+        "sku": "B1007",
+        "color": "Black",
+        "sizes": {
+          "S": 0,
+          "M": 9,
+          "L": 0,
+          "XL": 0,
+          "2XL": 0
+        },
+        "quantity": 9,
+        "unit_price": "37.00"
+      }
+    ],
+    "tags": [
+      "zero_sizes",
+      "odd_total",
+      "duplicate_name_customer"
+    ],
+    "storefront": "web-denver"
+  },
+  {
+    "id": "W-1032",
+    "source_ref": "WEB-958627",
+    "customer": {
+      "name": "Northwind Outfitters"
+    },
+    "notes": "Gift wrap",
+    "lines": [
+      {
+        "sku": "B1008",
+        "color": "Forest Green",
+        "sizes": {
+          "S": 9,
+          "M": 0,
+          "L": 9,
+          "XL": 0,
+          "2XL": 0
+        },
+        "quantity": 18,
+        "unit_price": "40.50"
+      },
+      {
+        "sku": "A1005",
+        "color": "Red",
+        "sizes": {
+          "S": 10,
+          "M": 0,
+          "L": 0,
+          "XL": 0,
+          "2XL": 2
+        },
+        "quantity": 12,
+        "unit_price": "24.00"
+      }
+    ],
+    "tags": [
+      "zero_sizes",
+      "duplicate_name_customer",
+      "multi_line"
+    ],
+    "storefront": "web-denver"
+  },
+  {
+    "id": "W-1033",
+    "source_ref": "WEB-606605",
+    "customer": {
+      "name": "Northwind Outfitters"
+    },
+    "notes": "Ship together",
+    "lines": [
+      {
+        "sku": "A1004",
+        "color": "Black",
+        "sizes": {
+          "S": 0,
+          "M": 5,
+          "L": 0,
+          "XL": 0,
+          "2XL": 0
+        },
+        "quantity": 5,
+        "unit_price": "20.50"
+      },
+      {
+        "sku": "A1007",
+        "color": "Heather Grey",
+        "sizes": {
+          "S": 2,
+          "M": 0,
+          "L": 0,
+          "XL": 0,
+          "2XL": 1
+        },
+        "quantity": 3,
+        "unit_price": "31.00"
+      },
+      {
+        "sku": "A1004",
+        "color": "White",
+        "sizes": {
+          "S": 0,
+          "M": 0,
+          "L": 11,
+          "XL": 0,
+          "2XL": 0
+        },
+        "quantity": 11,
+        "unit_price": "20.50"
+      }
+    ],
+    "tags": [
+      "duplicate_sku",
+      "zero_sizes",
+      "odd_total",
+      "duplicate_name_customer",
+      "multi_line"
+    ],
+    "storefront": "web-denver"
+  },
+  {
+    "id": "W-1034",
+    "source_ref": "WEB-947137",
+    "customer": {
+      "name": "Pinecrest Athletics"
+    },
+    "notes": "",
+    "lines": [
+      {
+        "sku": "A1002",
+        "color": "Heather Grey",
+        "sizes": {
+          "S": 11,
+          "M": 0,
+          "L": 0,
+          "XL": 0,
+          "2XL": 0
+        },
+        "quantity": 11,
+        "unit_price": "13.50"
+      },
+      {
+        "sku": "A1009",
+        "color": "Navy",
+        "sizes": {
+          "S": 6,
+          "M": 0,
+          "L": 0,
+          "XL": 1,
+          "2XL": 0
+        },
+        "quantity": 7,
+        "unit_price": "38.00"
+      },
+      {
+        "sku": "B1003",
+        "color": "Red",
+        "sizes": {
+          "S": 6,
+          "M": 0,
+          "L": 0,
+          "XL": 11,
+          "2XL": 12
+        },
+        "quantity": 29,
+        "unit_price": "23.00"
+      }
+    ],
+    "tags": [
+      "zero_sizes",
+      "odd_total",
+      "duplicate_name_customer",
+      "multi_line"
+    ],
+    "storefront": "web-boise"
+  },
+  {
+    "id": "W-1035",
+    "source_ref": "WEB-563055",
+    "customer": {
+      "name": "Pinecrest Athletics"
+    },
+    "notes": "",
+    "lines": [
+      {
+        "sku": "B1001",
+        "color": "Navy",
+        "sizes": {
+          "S": 9,
+          "M": 0,
+          "L": 12,
+          "XL": 0,
+          "2XL": 12
+        },
+        "quantity": 33,
+        "unit_price": "16.00"
+      }
+    ],
+    "tags": [
+      "zero_sizes",
+      "odd_total",
+      "duplicate_name_customer"
+    ],
+    "storefront": "web-boise"
+  },
+  {
+    "id": "W-1036",
+    "source_ref": "WEB-146280",
+    "customer": {
+      "name": "Maple & Vine Cafe"
+    },
+    "notes": "Rush",
+    "lines": [
+      {
+        "sku": "B1005",
+        "color": "Navy",
+        "sizes": {
+          "S": 0,
+          "M": 8,
+          "L": 0,
+          "XL": 4,
+          "2XL": 0
+        },
+        "quantity": 12,
+        "unit_price": "30.00"
+      },
+      {
+        "sku": "A1001",
+        "color": "Red",
+        "sizes": {
+          "S": 3,
+          "M": 0,
+          "L": 0,
+          "XL": 2,
+          "2XL": 9
+        },
+        "quantity": 14,
+        "unit_price": "10.00"
+      },
+      {
+        "sku": "B1009",
+        "color": "White",
+        "sizes": {
+          "S": 0,
+          "M": 0,
+          "L": 8,
+          "XL": 0,
+          "2XL": 0
+        },
+        "quantity": 8,
+        "unit_price": "44.00"
+      }
+    ],
+    "tags": [
+      "zero_sizes",
+      "multi_line"
+    ],
+    "storefront": "web-burlington"
+  },
+  {
+    "id": "W-1037",
+    "source_ref": "WEB-289202",
+    "customer": {
+      "name": "Redwood Dental Group"
+    },
+    "notes": "",
+    "lines": [
+      {
+        "sku": "B1007",
+        "color": "Navy",
+        "sizes": {
+          "S": 0,
+          "M": 0,
+          "L": 1,
+          "XL": 5,
+          "2XL": 11
+        },
+        "quantity": 17,
+        "unit_price": "37.00"
+      },
+      {
+        "sku": "B1004",
+        "color": "Heather Grey",
+        "sizes": {
+          "S": 0,
+          "M": 11,
+          "L": 1,
+          "XL": 1,
+          "2XL": 0
+        },
+        "quantity": 13,
+        "unit_price": "26.50"
+      }
+    ],
+    "tags": [
+      "zero_sizes",
+      "odd_total",
+      "multi_line"
+    ],
+    "storefront": "web-sacramento"
+  },
+  {
+    "id": "W-1038",
+    "source_ref": "WEB-516446",
+    "customer": {
+      "name": "Pinecrest Athletics"
+    },
+    "notes": "Rush",
+    "lines": [
+      {
+        "sku": "A1003",
+        "color": "Forest Green",
+        "sizes": {
+          "S": 0,
+          "M": 0,
+          "L": 0,
+          "XL": 1,
+          "2XL": 0
+        },
+        "quantity": 1,
+        "unit_price": "17.00"
+      },
+      {
+        "sku": "A1006",
+        "color": "Forest Green",
+        "sizes": {
+          "S": 5,
+          "M": 7,
+          "L": 8,
+          "XL": 0,
+          "2XL": 0
+        },
+        "quantity": 20,
+        "unit_price": "27.50"
+      }
+    ],
+    "tags": [
+      "zero_sizes",
+      "odd_total",
+      "duplicate_name_customer",
+      "multi_line"
+    ],
+    "storefront": "web-spokane"
+  },
+  {
+    "id": "W-1039",
+    "source_ref": "WEB-675689",
+    "customer": {
+      "name": "Northwind Outfitters"
+    },
+    "notes": "",
+    "lines": [
+      {
+        "sku": "A1003",
+        "color": "White",
+        "sizes": {
+          "S": 8,
+          "M": 0,
+          "L": 0,
+          "XL": 0,
+          "2XL": 0
+        },
+        "quantity": 8,
+        "unit_price": "17.00"
+      },
+      {
+        "sku": "A1003",
+        "color": "Heather Grey",
+        "sizes": {
+          "S": 3,
+          "M": 12,
+          "L": 0,
+          "XL": 0,
+          "2XL": 0
+        },
+        "quantity": 15,
+        "unit_price": "17.00"
+      }
+    ],
+    "tags": [
+      "duplicate_sku",
+      "zero_sizes",
+      "odd_total",
+      "duplicate_name_customer",
+      "multi_line"
+    ],
+    "storefront": "web-denver"
+  },
+  {
+    "id": "W-1040",
+    "source_ref": "WEB-895175",
+    "customer": {
+      "name": "Blue Heron Press"
+    },
+    "notes": "",
+    "lines": [
+      {
+        "sku": "B1001",
+        "color": "Black",
+        "sizes": {
+          "S": 7,
+          "M": 0,
+          "L": 0,
+          "XL": 0,
+          "2XL": 0
+        },
+        "quantity": 7,
+        "unit_price": "16.00"
+      },
+      {
+        "sku": "B1004",
+        "color": "White",
+        "sizes": {
+          "S": 9,
+          "M": 0,
+          "L": 0,
+          "XL": 0,
+          "2XL": 0
+        },
+        "quantity": 9,
+        "unit_price": "26.50"
+      }
+    ],
+    "tags": [
+      "zero_sizes",
+      "odd_total",
+      "multi_line"
+    ],
+    "storefront": "web-seattle"
+  },
+  {
+    "id": "W-1041",
+    "source_ref": "WEB-586493",
+    "customer": {
+      "name": "Redwood Dental Group"
+    },
+    "notes": "",
+    "lines": [
+      {
+        "sku": "A1007",
+        "color": "Black",
+        "sizes": {
+          "S": 0,
+          "M": 12,
+          "L": 0,
+          "XL": 4,
+          "2XL": 11
+        },
+        "quantity": 27,
+        "unit_price": "31.00"
+      }
+    ],
+    "tags": [
+      "zero_sizes",
+      "odd_total"
+    ],
+    "storefront": "web-sacramento"
+  },
+  {
+    "id": "W-1042",
+    "source_ref": "WEB-791306",
+    "customer": {
+      "name": "Pinecrest Athletics"
+    },
+    "notes": "",
+    "lines": [
+      {
+        "sku": "B1005",
+        "color": "Navy",
+        "sizes": {
+          "S": 4,
+          "M": 0,
+          "L": 5,
+          "XL": 0,
+          "2XL": 0
+        },
+        "quantity": 9,
+        "unit_price": "30.00"
+      }
+    ],
+    "tags": [
+      "zero_sizes",
+      "odd_total",
+      "duplicate_name_customer"
+    ],
+    "storefront": "web-boise"
+  },
+  {
+    "id": "W-1043",
+    "source_ref": "WEB-974022",
+    "customer": {
+      "name": "Blue Heron Press"
+    },
+    "notes": "Call before delivery",
+    "lines": [
+      {
+        "sku": "B1005",
+        "color": "Heather Grey",
+        "sizes": {
+          "S": 0,
+          "M": 0,
+          "L": 0,
+          "XL": 0,
+          "2XL": 3
+        },
+        "quantity": 3,
+        "unit_price": "30.00"
+      }
+    ],
+    "tags": [
+      "zero_sizes",
+      "odd_total"
+    ],
+    "storefront": "web-seattle"
+  },
+  {
+    "id": "W-1044",
+    "source_ref": "WEB-430138",
+    "customer": {
+      "name": "Harbor Light Supply"
+    },
+    "notes": "Rush",
+    "lines": [
+      {
+        "sku": "A1004",
+        "color": "Heather Grey",
+        "sizes": {
+          "S": 5,
+          "M": 12,
+          "L": 0,
+          "XL": 7,
+          "2XL": 0
+        },
+        "quantity": 24,
+        "unit_price": "20.50"
+      },
+      {
+        "sku": "B1006",
+        "color": "Heather Grey",
+        "sizes": {
+          "S": 9,
+          "M": 0,
+          "L": 0,
+          "XL": 0,
+          "2XL": 0
+        },
+        "quantity": 9,
+        "unit_price": "33.50"
+      }
+    ],
+    "tags": [
+      "zero_sizes",
+      "odd_total",
+      "multi_line"
+    ],
+    "storefront": "web-portland"
+  },
+  {
+    "id": "W-1045",
+    "source_ref": "WEB-196415",
+    "customer": {
+      "name": "Maple & Vine Cafe"
+    },
+    "notes": "Gift wrap",
+    "lines": [
+      {
+        "sku": "A1001",
+        "color": "Forest Green",
+        "sizes": {
+          "S": 11,
+          "M": 0,
+          "L": 2,
+          "XL": 2,
+          "2XL": 0
+        },
+        "quantity": 15,
+        "unit_price": "10.00"
+      },
+      {
+        "sku": "A1001",
+        "color": "White",
+        "sizes": {
+          "S": 5,
+          "M": 0,
+          "L": 0,
+          "XL": 0,
+          "2XL": 2
+        },
+        "quantity": 7,
+        "unit_price": "10.00"
+      }
+    ],
+    "tags": [
+      "duplicate_sku",
+      "zero_sizes",
+      "odd_total",
+      "multi_line"
+    ],
+    "storefront": "web-burlington"
+  },
+  {
+    "id": "W-1046",
+    "source_ref": "WEB-174406",
+    "customer": {
+      "name": "Redwood Dental Group"
+    },
+    "notes": "Rush",
+    "lines": [
+      {
+        "sku": "A1006",
+        "color": "Navy",
+        "sizes": {
+          "S": 0,
+          "M": 3,
+          "L": 0,
+          "XL": 0,
+          "2XL": 0
+        },
+        "quantity": 3,
+        "unit_price": "27.50"
+      }
+    ],
+    "tags": [
+      "zero_sizes",
+      "odd_total"
+    ],
+    "storefront": "web-sacramento"
+  },
+  {
+    "id": "W-1047",
+    "source_ref": "WEB-253244",
+    "customer": {
+      "name": "Copperline Electric"
+    },
+    "notes": "Ship together",
+    "lines": [
+      {
+        "sku": "A1005",
+        "color": "Heather Grey",
+        "sizes": {
+          "S": 0,
+          "M": 6,
+          "L": 0,
+          "XL": 0,
+          "2XL": 0
+        },
+        "quantity": 6,
+        "unit_price": "24.00"
+      },
+      {
+        "sku": "B1008",
+        "color": "Red",
+        "sizes": {
+          "S": 0,
+          "M": 12,
+          "L": 8,
+          "XL": 0,
+          "2XL": 7
+        },
+        "quantity": 27,
+        "unit_price": "40.50"
+      }
+    ],
+    "tags": [
+      "zero_sizes",
+      "odd_total",
+      "multi_line"
+    ],
+    "storefront": "web-tucson"
+  },
+  {
+    "id": "W-1048",
+    "source_ref": "WEB-652251",
+    "customer": {
+      "name": "Northwind Outfitters"
+    },
+    "notes": "Gift wrap",
+    "lines": [
+      {
+        "sku": "A1008",
+        "color": "Black",
+        "sizes": {
+          "S": 0,
+          "M": 0,
+          "L": 0,
+          "XL": 6,
+          "2XL": 0
+        },
+        "quantity": 6,
+        "unit_price": "34.50"
+      }
+    ],
+    "tags": [
+      "zero_sizes",
+      "duplicate_name_customer"
+    ],
+    "storefront": "web-austin"
+  },
+  {
+    "id": "W-1049",
+    "source_ref": "WEB-434061",
+    "customer": {
+      "name": "Blue Heron Press"
+    },
+    "notes": "Gift wrap",
+    "lines": [
+      {
+        "sku": "B1001",
+        "color": "Forest Green",
+        "sizes": {
+          "S": 0,
+          "M": 9,
+          "L": 0,
+          "XL": 6,
+          "2XL": 0
+        },
+        "quantity": 15,
+        "unit_price": "16.00"
+      }
+    ],
+    "tags": [
+      "zero_sizes",
+      "odd_total"
+    ],
+    "storefront": "web-seattle"
+  },
+  {
+    "id": "W-1050",
+    "source_ref": "WEB-656643",
+    "customer": {
+      "name": "Blue Heron Press"
+    },
+    "notes": "Call before delivery",
+    "lines": [
+      {
+        "sku": "A1003",
+        "color": "Black",
+        "sizes": {
+          "S": 0,
+          "M": 0,
+          "L": 0,
+          "XL": 0,
+          "2XL": 3
+        },
+        "quantity": 3,
+        "unit_price": "17.00"
+      },
+      {
+        "sku": "A1007",
+        "color": "White",
+        "sizes": {
+          "S": 0,
+          "M": 10,
+          "L": 11,
+          "XL": 0,
+          "2XL": 0
+        },
+        "quantity": 21,
+        "unit_price": "31.00"
+      }
+    ],
+    "tags": [
+      "zero_sizes",
+      "odd_total",
+      "multi_line"
+    ],
+    "storefront": "web-seattle"
+  },
+  {
+    "id": "W-1051",
+    "source_ref": "WEB-454729",
+    "customer": {
+      "name": "Northwind Outfitters"
+    },
+    "notes": "",
+    "lines": [
+      {
+        "sku": "A1004",
+        "color": "White",
+        "sizes": {
+          "S": 5,
+          "M": 6,
+          "L": 0,
+          "XL": 4,
+          "2XL": 0
+        },
+        "quantity": 15,
+        "unit_price": "20.50"
+      },
+      {
+        "sku": "A1007",
+        "color": "Heather Grey",
+        "sizes": {
+          "S": 10,
+          "M": 7,
+          "L": 0,
+          "XL": 0,
+          "2XL": 3
+        },
+        "quantity": 20,
+        "unit_price": "31.00"
+      },
+      {
+        "sku": "A1004",
+        "color": "Navy",
+        "sizes": {
+          "S": 0,
+          "M": 12,
+          "L": 8,
+          "XL": 0,
+          "2XL": 11
+        },
+        "quantity": 31,
+        "unit_price": "20.50"
+      }
+    ],
+    "tags": [
+      "duplicate_sku",
+      "zero_sizes",
+      "odd_total",
+      "duplicate_name_customer",
+      "multi_line"
+    ],
+    "storefront": "web-denver"
+  },
+  {
+    "id": "W-1052",
+    "source_ref": "WEB-382734",
+    "customer": {
+      "name": "Lakeside Brewing Co"
+    },
+    "notes": "Call before delivery",
+    "lines": [
+      {
+        "sku": "B1003",
+        "color": "Forest Green",
+        "sizes": {
+          "S": 5,
+          "M": 0,
+          "L": 5,
+          "XL": 0,
+          "2XL": 1
+        },
+        "quantity": 11,
+        "unit_price": "23.00"
+      },
+      {
+        "sku": "B1001",
+        "color": "Heather Grey",
+        "sizes": {
+          "S": 0,
+          "M": 0,
+          "L": 0,
+          "XL": 3,
+          "2XL": 4
+        },
+        "quantity": 7,
+        "unit_price": "16.00"
+      }
+    ],
+    "tags": [
+      "zero_sizes",
+      "odd_total",
+      "multi_line"
+    ],
+    "storefront": "web-madison"
+  },
+  {
+    "id": "W-1053",
+    "source_ref": "WEB-310369",
+    "customer": {
+      "name": "Pinecrest Athletics"
+    },
+    "notes": "Ship together",
+    "lines": [
+      {
+        "sku": "A1009",
+        "color": "Red",
+        "sizes": {
+          "S": 0,
+          "M": 4,
+          "L": 0,
+          "XL": 0,
+          "2XL": 11
+        },
+        "quantity": 15,
+        "unit_price": "38.00"
+      }
+    ],
+    "tags": [
+      "zero_sizes",
+      "odd_total",
+      "duplicate_name_customer"
+    ],
+    "storefront": "web-spokane"
+  },
+  {
+    "id": "W-1054",
+    "source_ref": "WEB-720538",
+    "customer": {
+      "name": "Pinecrest Athletics"
+    },
+    "notes": "Call before delivery",
+    "lines": [
+      {
+        "sku": "A1001",
+        "color": "Red",
+        "sizes": {
+          "S": 0,
+          "M": 9,
+          "L": 0,
+          "XL": 0,
+          "2XL": 0
+        },
+        "quantity": 9,
+        "unit_price": "10.00"
+      },
+      {
+        "sku": "A1010",
+        "color": "Forest Green",
+        "sizes": {
+          "S": 0,
+          "M": 0,
+          "L": 4,
+          "XL": 12,
+          "2XL": 8
+        },
+        "quantity": 24,
+        "unit_price": "41.50"
+      }
+    ],
+    "tags": [
+      "zero_sizes",
+      "odd_total",
+      "duplicate_name_customer",
+      "multi_line"
+    ],
+    "storefront": "web-spokane"
+  },
+  {
+    "id": "W-1055",
+    "source_ref": "WEB-853739",
+    "customer": {
+      "name": "Redwood Dental Group"
+    },
+    "notes": "",
+    "lines": [
+      {
+        "sku": "B1009",
+        "color": "Navy",
+        "sizes": {
+          "S": 0,
+          "M": 0,
+          "L": 0,
+          "XL": 5,
+          "2XL": 0
+        },
+        "quantity": 5,
+        "unit_price": "44.00"
+      },
+      {
+        "sku": "A1009",
+        "color": "Red",
+        "sizes": {
+          "S": 0,
+          "M": 0,
+          "L": 6,
+          "XL": 0,
+          "2XL": 0
+        },
+        "quantity": 6,
+        "unit_price": "38.00"
+      },
+      {
+        "sku": "B1007",
+        "color": "Forest Green",
+        "sizes": {
+          "S": 12,
+          "M": 0,
+          "L": 0,
+          "XL": 0,
+          "2XL": 0
+        },
+        "quantity": 12,
+        "unit_price": "37.00"
+      }
+    ],
+    "tags": [
+      "zero_sizes",
+      "odd_total",
+      "multi_line"
+    ],
+    "storefront": "web-sacramento"
+  },
+  {
+    "id": "W-1056",
+    "source_ref": "WEB-126866",
+    "customer": {
+      "name": "Granite State Roofing"
+    },
+    "notes": "",
+    "lines": [
+      {
+        "sku": "B1003",
+        "color": "Red",
+        "sizes": {
+          "S": 0,
+          "M": 0,
+          "L": 7,
+          "XL": 0,
+          "2XL": 12
+        },
+        "quantity": 19,
+        "unit_price": "23.00"
+      }
+    ],
+    "tags": [
+      "zero_sizes",
+      "odd_total"
+    ],
+    "storefront": "web-concord"
+  },
+  {
+    "id": "W-1057",
+    "source_ref": "WEB-321953",
+    "customer": {
+      "name": "Redwood Dental Group"
+    },
+    "notes": "Call before delivery",
+    "lines": [
+      {
+        "sku": "B1008",
+        "color": "Navy",
+        "sizes": {
+          "S": 0,
+          "M": 0,
+          "L": 12,
+          "XL": 5,
+          "2XL": 6
+        },
+        "quantity": 23,
+        "unit_price": "40.50"
+      },
+      {
+        "sku": "B1008",
+        "color": "Heather Grey",
+        "sizes": {
+          "S": 9,
+          "M": 0,
+          "L": 0,
+          "XL": 0,
+          "2XL": 10
+        },
+        "quantity": 19,
+        "unit_price": "40.50"
+      }
+    ],
+    "tags": [
+      "duplicate_sku",
+      "zero_sizes",
+      "odd_total",
+      "multi_line"
+    ],
+    "storefront": "web-sacramento"
+  },
+  {
+    "id": "W-1058",
+    "source_ref": "WEB-595602",
+    "customer": {
+      "name": "Northwind Outfitters"
+    },
+    "notes": "Rush",
+    "lines": [
+      {
+        "sku": "B1010",
+        "color": "Black",
+        "sizes": {
+          "S": 7,
+          "M": 3,
+          "L": 0,
+          "XL": 0,
+          "2XL": 0
+        },
+        "quantity": 10,
+        "unit_price": "47.50"
+      },
+      {
+        "sku": "B1003",
+        "color": "Forest Green",
+        "sizes": {
+          "S": 3,
+          "M": 4,
+          "L": 0,
+          "XL": 0,
+          "2XL": 0
+        },
+        "quantity": 7,
+        "unit_price": "23.00"
+      }
+    ],
+    "tags": [
+      "zero_sizes",
+      "odd_total",
+      "duplicate_name_customer",
+      "multi_line"
+    ],
+    "storefront": "web-denver"
+  },
+  {
+    "id": "W-1059",
+    "source_ref": "WEB-121148",
+    "customer": {
+      "name": "Pinecrest Athletics"
+    },
+    "notes": "",
+    "lines": [
+      {
+        "sku": "B1003",
+        "color": "Navy",
+        "sizes": {
+          "S": 4,
+          "M": 9,
+          "L": 0,
+          "XL": 4,
+          "2XL": 0
+        },
+        "quantity": 17,
+        "unit_price": "23.00"
+      }
+    ],
+    "tags": [
+      "zero_sizes",
+      "odd_total",
+      "duplicate_name_customer"
+    ],
+    "storefront": "web-boise"
+  },
+  {
+    "id": "W-1060",
+    "source_ref": "WEB-270761",
+    "customer": {
+      "name": "Redwood Dental Group"
+    },
+    "notes": "",
+    "lines": [
+      {
+        "sku": "A1002",
+        "color": "Heather Grey",
+        "sizes": {
+          "S": 0,
+          "M": 2,
+          "L": 4,
+          "XL": 5,
+          "2XL": 0
+        },
+        "quantity": 11,
+        "unit_price": "13.50"
+      }
+    ],
+    "tags": [
+      "zero_sizes",
+      "odd_total"
+    ],
+    "storefront": "web-sacramento"
+  }
+]
