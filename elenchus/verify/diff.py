@@ -1,9 +1,14 @@
 """Compare what the ERP stored for a run with the source order, field by field.
 
-``diff_order`` returns a list of ``Mismatch`` objects. A run passes only when
-that list is empty. Values are normalized before comparing: text ignores case
-and extra whitespace, size names go through an alias table, and prices compare
-as cents.
+``diff_result`` returns the ``Mismatch`` objects plus any ``Unverifiable``
+fields. A run passes only when both are empty. Values are normalized before
+comparing: text ignores case and extra whitespace, size names go through an
+alias table, and prices compare as cents.
+
+Source-minimal mode: when the source customer is only a name (no email or
+city), the diff checks the name. If that name matches more than one ERP
+customer it cannot tell which one the order was entered under, so it reports
+the customer as ``Unverifiable`` instead of passing it.
 """
 
 from __future__ import annotations
@@ -33,6 +38,31 @@ class Mismatch:
 
     def to_dict(self) -> dict:
         return asdict(self)
+
+
+@dataclass(frozen=True)
+class Unverifiable:
+    field: str
+    reason: str
+
+    def to_dict(self) -> dict:
+        return asdict(self)
+
+
+@dataclass(frozen=True)
+class DiffResult:
+    mismatches: list[Mismatch]
+    unverifiable: list[Unverifiable]
+
+    @property
+    def clean(self) -> bool:
+        return not self.mismatches and not self.unverifiable
+
+
+def is_minimal(source: dict) -> bool:
+    """True when the source customer has no email or city to check against."""
+    c = source["customer"]
+    return "email" not in c or "city" not in c
 
 
 def norm_text(value: object) -> str:
@@ -68,7 +98,9 @@ def _load_stored(db_path: str | Path, erp_order_id: int | None):
     conn = connect(db_path)
     try:
         row = conn.execute(
-            "SELECT o.source_ref, o.notes, o.status, c.name, c.email, c.city "
+            "SELECT o.source_ref, o.notes, o.status, o.customer_id, "
+            "c.name, c.email, c.city, "
+            "(SELECT COUNT(*) FROM customers c2 WHERE c2.name = c.name) AS same_name "
             "FROM orders o JOIN customers c ON c.id = o.customer_id WHERE o.id = ?",
             (erp_order_id,),
         ).fetchone()
@@ -94,6 +126,7 @@ def stored_fields(db_path: str | Path, erp_order_id: int | None) -> dict | None:
         return None
     row, lines = loaded
     out: dict[str, object] = {
+        "customer.id": row["customer_id"],
         "customer.name": row["name"],
         "customer.city": row["city"],
         "customer.email": row["email"],
@@ -112,14 +145,23 @@ def stored_fields(db_path: str | Path, erp_order_id: int | None) -> dict | None:
     return out
 
 
-def diff_order(
-    db_path: str | Path, erp_order_id: int | None, source: dict
-) -> list[Mismatch]:
-    """Mismatches between ERP order ``erp_order_id`` and the ``source`` order."""
+def diff_result(
+    db_path: str | Path,
+    erp_order_id: int | None,
+    source: dict,
+    minimal: bool | None = None,
+) -> DiffResult:
+    """Compare ERP order ``erp_order_id`` with ``source``.
+
+    ``minimal`` selects source-minimal mode; None detects it from the source.
+    """
     loaded = _load_stored(db_path, erp_order_id)
     if loaded is None:
-        return [Mismatch("order", "present", "missing")]
+        return DiffResult([Mismatch("order", "present", "missing")], [])
     row, lines = loaded
+    if minimal is None:
+        minimal = is_minimal(source)
+    unverifiable: list[Unverifiable] = []
 
     out: list[Mismatch] = []
 
@@ -129,8 +171,18 @@ def diff_order(
 
     customer = source["customer"]
     check("customer.name", customer["name"], row["name"])
-    check("customer.city", customer["city"], row["city"])
-    check("customer.email", customer["email"], row["email"])
+    if minimal:
+        if row["same_name"] > 1:
+            unverifiable.append(
+                Unverifiable(
+                    "customer",
+                    f"the source gives only the name {customer['name']!r}, which matches "
+                    f"{row['same_name']} ERP customers, so the account cannot be checked",
+                )
+            )
+    else:
+        check("customer.city", customer["city"], row["city"])
+        check("customer.email", customer["email"], row["email"])
     check("source_ref", source["source_ref"], row["source_ref"])
     check("notes", source["notes"], row["notes"])
     check("status", "submitted", row["status"])
@@ -156,16 +208,17 @@ def diff_order(
                     _money(got["unit_price_cents"]),
                 )
             )
-    return out
+    return DiffResult(out, unverifiable)
 
 
-def verify_run(db_path: str | Path, record: dict, orders_by_id: dict[str, dict]) -> dict:
-    """Verdict for one run record. ``passed`` is True only with zero mismatches."""
-    mismatches = diff_order(db_path, record["erp_order_id"], orders_by_id[record["order_id"]])
-    return {
-        "order_id": record["order_id"],
-        "erp_order_id": record["erp_order_id"],
-        "claimed_success": record["claimed_success"],
-        "passed": not mismatches,
-        "mismatches": [m.to_dict() for m in mismatches],
-    }
+def diff_order(
+    db_path: str | Path, erp_order_id: int | None, source: dict
+) -> list[Mismatch]:
+    """Mismatches for a full-mode source order (customer has email and city).
+
+    Source-minimal orders can have unverifiable fields that this list cannot
+    show, so they go through ``diff_result`` instead.
+    """
+    if is_minimal(source):
+        raise ValueError("source-minimal order: use diff_result to see unverifiable fields")
+    return diff_result(db_path, erp_order_id, source, minimal=False).mismatches
