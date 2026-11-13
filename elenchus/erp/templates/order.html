@@ -28,47 +28,7 @@
 </table>
 
 {% if order.status == "draft" %}
-<h2>Add line</h2>
-<form method="post" action="/orders/{{ order.id }}/lines{{ vq }}">
-  {% for key in variant.line_order %}
-    {% if key == "sku" %}
-      <div class="field">
-        <label for="f-{{ variant.field_name('sku') }}">{{ variant.label("sku") }}</label>
-        <select id="f-{{ variant.field_name('sku') }}" name="{{ variant.field_name('sku') }}">
-          <option value="">--</option>
-          {% for p in products %}<option value="{{ p.sku }}">{{ p.sku }} {{ p.name }}</option>{% endfor %}
-        </select>
-      </div>
-    {% elif key == "color" %}
-      <div class="field">
-        <label for="f-{{ variant.field_name('color') }}">{{ variant.label("color") }}</label>
-        <select id="f-{{ variant.field_name('color') }}" name="{{ variant.field_name('color') }}">
-          <option value="">--</option>
-          {% for c in colors %}<option value="{{ c }}">{{ c }}</option>{% endfor %}
-        </select>
-      </div>
-    {% elif key == "sizes" %}
-      {{ m.size_grid(variant, sizes) }}
-    {% elif key == "size" %}
-      <div class="field">
-        <label for="f-{{ variant.field_name('size') }}">{{ variant.label("size") }}</label>
-        <select id="f-{{ variant.field_name('size') }}" name="{{ variant.field_name('size') }}">
-          <option value="">--</option>
-          {% for s in sizes %}<option value="{{ s }}">{{ variant.label(s) }}</option>{% endfor %}
-        </select>
-      </div>
-    {% elif key == "quantity" %}
-      {{ m.field(variant, "quantity", type="number") }}
-    {% else %}
-      {{ m.field(variant, key) }}
-    {% endif %}
-  {% endfor %}
-  {{ m.buttons(variant, "Save line") }}
-</form>
-
-<form method="post" action="/orders/{{ order.id }}/finish{{ vq }}">
-  <button type="submit">{{ variant.finish_label }}</button>
-</form>
+{% include "line_form.html" %}
 {% else %}
 <p class="readonly">This order is {{ order.status }} and can no longer be changed.</p>
 {% endif %}
