@@ -61,12 +61,10 @@ def _money(cents: int) -> str:
     return f"{cents // 100}.{cents % 100:02d}"
 
 
-def diff_order(
-    db_path: str | Path, erp_order_id: int | None, source: dict
-) -> list[Mismatch]:
-    """Mismatches between ERP order ``erp_order_id`` and the ``source`` order."""
+def _load_stored(db_path: str | Path, erp_order_id: int | None):
+    """(order row, line rows) for an ERP order, or None if it does not exist."""
     if erp_order_id is None:
-        return [Mismatch("order", "present", "missing")]
+        return None
     conn = connect(db_path)
     try:
         row = conn.execute(
@@ -75,13 +73,53 @@ def diff_order(
             (erp_order_id,),
         ).fetchone()
         if row is None:
-            return [Mismatch("order", "present", "missing")]
+            return None
         lines = conn.execute(
             "SELECT * FROM order_lines WHERE order_id = ? ORDER BY line_no",
             (erp_order_id,),
         ).fetchall()
     finally:
         conn.close()
+    return row, lines
+
+
+def stored_fields(db_path: str | Path, erp_order_id: int | None) -> dict | None:
+    """What the ERP stored, flattened to the same field names ``diff_order`` reports.
+
+    Returns None when the order does not exist. Prices are strings like
+    ``"41.50"``; quantities and sizes are ints.
+    """
+    loaded = _load_stored(db_path, erp_order_id)
+    if loaded is None:
+        return None
+    row, lines = loaded
+    out: dict[str, object] = {
+        "customer.name": row["name"],
+        "customer.city": row["city"],
+        "customer.email": row["email"],
+        "source_ref": row["source_ref"],
+        "notes": row["notes"],
+        "status": row["status"],
+    }
+    for n, line in enumerate(lines, start=1):
+        p = f"lines[{n}]"
+        out[f"{p}.sku"] = line["sku"]
+        out[f"{p}.color"] = line["color"]
+        for size in SIZES:
+            out[f"{p}.sizes.{size}"] = line[SIZE_COLUMNS[size]]
+        out[f"{p}.quantity"] = line["quantity"]
+        out[f"{p}.unit_price"] = _money(line["unit_price_cents"])
+    return out
+
+
+def diff_order(
+    db_path: str | Path, erp_order_id: int | None, source: dict
+) -> list[Mismatch]:
+    """Mismatches between ERP order ``erp_order_id`` and the ``source`` order."""
+    loaded = _load_stored(db_path, erp_order_id)
+    if loaded is None:
+        return [Mismatch("order", "present", "missing")]
+    row, lines = loaded
 
     out: list[Mismatch] = []
 
