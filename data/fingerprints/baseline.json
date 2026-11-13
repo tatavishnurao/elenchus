@@ -1,0 +1,127 @@
+{
+  "hash": "b25c35b832042104",
+  "structure": {
+    "pages": {
+      "line_form": {
+        "forms": [
+          {
+            "buttons": [
+              {
+                "text": "Save line",
+                "type": "submit"
+              },
+              {
+                "text": "Reset",
+                "type": "reset"
+              }
+            ],
+            "fields": [
+              {
+                "label": "Product",
+                "name": "sku",
+                "tag": "select",
+                "type": "select"
+              },
+              {
+                "label": "Color",
+                "name": "color",
+                "tag": "select",
+                "type": "select"
+              },
+              {
+                "label": "S",
+                "name": "qty_s",
+                "tag": "input",
+                "type": "number"
+              },
+              {
+                "label": "M",
+                "name": "qty_m",
+                "tag": "input",
+                "type": "number"
+              },
+              {
+                "label": "L",
+                "name": "qty_l",
+                "tag": "input",
+                "type": "number"
+              },
+              {
+                "label": "XL",
+                "name": "qty_xl",
+                "tag": "input",
+                "type": "number"
+              },
+              {
+                "label": "2XL",
+                "name": "qty_2xl",
+                "tag": "input",
+                "type": "number"
+              },
+              {
+                "label": "Quantity",
+                "name": "quantity",
+                "tag": "input",
+                "type": "number"
+              },
+              {
+                "label": "Unit price",
+                "name": "unit_price",
+                "tag": "input",
+                "type": "text"
+              }
+            ]
+          },
+          {
+            "buttons": [
+              {
+                "text": "Finish order",
+                "type": "submit"
+              }
+            ],
+            "fields": []
+          }
+        ],
+        "size_widget": "grid"
+      },
+      "new_order": {
+        "forms": [
+          {
+            "buttons": [
+              {
+                "text": "Create order",
+                "type": "submit"
+              },
+              {
+                "text": "Reset",
+                "type": "reset"
+              }
+            ],
+            "fields": [
+              {
+                "label": "Customer",
+                "name": "customer_id",
+                "tag": "select",
+                "type": "select"
+              },
+              {
+                "label": "Web order ref",
+                "name": "source_ref",
+                "tag": "input",
+                "type": "text"
+              },
+              {
+                "label": "Notes",
+                "name": "notes",
+                "tag": "input",
+                "type": "text"
+              }
+            ]
+          }
+        ],
+        "size_widget": "none"
+      }
+    },
+    "version": 1
+  }
+}
