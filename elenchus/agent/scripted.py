@@ -23,7 +23,7 @@ from urllib.parse import urlparse
 from playwright.sync_api import Page, sync_playwright
 
 from ..orders import DEFAULT_PATH, load_orders
-from .faults import DEFAULT_SEED, FaultInjector
+from .faults import DEFAULT_SEED, FaultInjector, format_summary
 
 DEFAULT_RUNS_PATH = Path("out/runs.jsonl")
 MODE = "scripted"
@@ -173,7 +173,7 @@ def main() -> None:
     parser.add_argument("--fault-seed", type=int, default=DEFAULT_SEED)
     args = parser.parse_args()
     orders = load_orders(args.orders)[: args.limit]
-    for rec in run_orders(
+    records = run_orders(
         args.base_url,
         orders,
         variant=args.variant,
@@ -181,9 +181,11 @@ def main() -> None:
         headless=not args.headed,
         fault_rate=args.fault_rate,
         fault_seed=args.fault_seed,
-    ):
+    )
+    for rec in records:
         fault = rec["fault"]["type"] if rec["fault"] else "-"
         print(rec["order_id"], "claimed_success=" + str(rec["claimed_success"]), rec["erp_order_id"], fault)
+    print(format_summary(records, args.fault_rate))
 
 
 if __name__ == "__main__":
