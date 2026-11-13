@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% import "macros.html" as m %}
+{% block title %}Order {{ order.id }} · Mock ERP{% endblock %}
+{% block content %}
+<h1>Order {{ order.id }}</h1>
+<p>
+  {{ variant.label("customer") }}: {{ order.customer_name }} ({{ order.customer_city }})<br>
+  {{ variant.label("source_ref") }}: {{ order.source_ref }}<br>
+  {{ variant.label("notes") }}: {{ order.notes }}<br>
+  Status: <strong id="order-status">{{ order.status }}</strong>
+</p>
+
+<table>
+  <tr>
+    <th>#</th><th>{{ variant.label("sku") }}</th><th>{{ variant.label("color") }}</th>
+    {% for size in sizes %}<th>{{ variant.label(size) }}</th>{% endfor %}
+    <th>{{ variant.label("quantity") }}</th><th>{{ variant.label("unit_price") }}</th>
+  </tr>
+  {% for l in lines %}
+  <tr>
+    <td>{{ l.line_no }}</td><td>{{ l.sku }} {{ l.product_name }}</td><td>{{ l.color }}</td>
+    <td>{{ l.qty_s }}</td><td>{{ l.qty_m }}</td><td>{{ l.qty_l }}</td><td>{{ l.qty_xl }}</td><td>{{ l.qty_2xl }}</td>
+    <td>{{ l.quantity }}</td><td>{{ l.unit_price_cents | money }}</td>
+  </tr>
+  {% else %}
+  <tr><td colspan="{{ 5 + sizes | length }}">No lines yet.</td></tr>
+  {% endfor %}
+</table>
+
+{% if order.status == "draft" %}
+<h2>Add line</h2>
+<form method="post" action="/orders/{{ order.id }}/lines{{ vq }}">
+  {% for key in variant.line_order %}
+    {% if key == "sku" %}
+      <div class="field">
+        <label for="f-{{ variant.field_name('sku') }}">{{ variant.label("sku") }}</label>
+        <select id="f-{{ variant.field_name('sku') }}" name="{{ variant.field_name('sku') }}">
+          <option value="">--</option>
+          {% for p in products %}<option value="{{ p.sku }}">{{ p.sku }} {{ p.name }}</option>{% endfor %}
+        </select>
+      </div>
+    {% elif key == "color" %}
+      <div class="field">
+        <label for="f-{{ variant.field_name('color') }}">{{ variant.label("color") }}</label>
+        <select id="f-{{ variant.field_name('color') }}" name="{{ variant.field_name('color') }}">
+          <option value="">--</option>
+          {% for c in colors %}<option value="{{ c }}">{{ c }}</option>{% endfor %}
+        </select>
+      </div>
+    {% elif key == "sizes" %}
+      {{ m.size_grid(variant, sizes) }}
+    {% elif key == "size" %}
+      <div class="field">
+        <label for="f-{{ variant.field_name('size') }}">{{ variant.label("size") }}</label>
+        <select id="f-{{ variant.field_name('size') }}" name="{{ variant.field_name('size') }}">
+          <option value="">--</option>
+          {% for s in sizes %}<option value="{{ s }}">{{ variant.label(s) }}</option>{% endfor %}
+        </select>
+      </div>
+    {% elif key == "quantity" %}
+      {{ m.field(variant, "quantity", type="number") }}
+    {% else %}
+      {{ m.field(variant, key) }}
+    {% endif %}
+  {% endfor %}
+  {{ m.buttons(variant, "Save line") }}
+</form>
+
+<form method="post" action="/orders/{{ order.id }}/finish{{ vq }}">
+  <button type="submit">{{ variant.finish_label }}</button>
+</form>
+{% else %}
+<p class="readonly">This order is {{ order.status }} and can no longer be changed.</p>
+{% endif %}
+{% endblock %}
