@@ -21,8 +21,8 @@ from elenchus.verify.diff import (
     norm_size,
     norm_sizes,
     norm_text,
-    verify_run,
 )
+from elenchus.verify.verdict import verify_run
 
 ORDERS = generate_orders()
 BY_ID = {o["id"]: o for o in ORDERS}
@@ -96,11 +96,11 @@ def test_diff_catches_fault(erp, tmp_path, kind):
     assert rec["claimed_success"] is True
     assert rec["fault"]["type"] == kind
     assert verdict["passed"] is False
-    fields = [m["field"] for m in verdict["mismatches"]]
+    fields = [m["field"] for m in verdict["diff_mismatches"]]
     assert fields and all(f.startswith(rec["fault"]["field"]) for f in fields), fields
 
     if kind == OFF_BY_ONE_QUANTITY:
-        (m,) = verdict["mismatches"]
+        (m,) = verdict["diff_mismatches"]
         assert m["actual"] == m["expected"] + 1
     elif kind == SWAPPED_SIZES:
         assert len(fields) >= 2  # both swapped sizes differ
@@ -108,7 +108,7 @@ def test_diff_catches_fault(erp, tmp_path, kind):
         assert {"customer.city", "customer.email"} <= set(fields)
         assert "customer.name" not in fields
     elif kind == STALE_PRICE:
-        (m,) = verdict["mismatches"]
+        (m,) = verdict["diff_mismatches"]
         assert float(m["actual"]) < float(m["expected"])
 
 
@@ -122,5 +122,5 @@ def test_clean_runs_have_zero_mismatches(erp, tmp_path):
     for rec in records:
         assert rec["fault"] is None and rec["claimed_success"] is True
         verdict = verify_run(db, rec, BY_ID)
-        assert verdict["mismatches"] == [], (rec["order_id"], verdict["mismatches"])
+        assert verdict["diff_mismatches"] == [], (rec["order_id"], verdict["diff_mismatches"])
         assert verdict["passed"] is True
