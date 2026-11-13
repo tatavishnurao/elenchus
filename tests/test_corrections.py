@@ -14,12 +14,15 @@ from elenchus.orders import generate_orders
 from elenchus.verify.corrections import (
     DEFAULT_PATH,
     Correction,
+    CustomerMapping,
     compile_corrections,
     load_corrections,
     replay_run,
 )
 
-CORRECTIONS = load_corrections(DEFAULT_PATH)
+ALL = load_corrections(DEFAULT_PATH)
+CORRECTIONS = [c for c in ALL if isinstance(c, Correction)]
+MAPPINGS = [c for c in ALL if isinstance(c, CustomerMapping)]
 CHECKS = compile_corrections(CORRECTIONS)
 BY_ID = {o["id"]: o for o in generate_orders()}
 EXPECTED_IDS = ["C-001", "C-002", "C-003", "C-004", "C-005"]
@@ -78,6 +81,14 @@ def test_file_has_one_entry_per_fault_type_and_a_size_alias():
     fields = [c.field.rsplit(".", 1)[-1] for c in CORRECTIONS]
     assert fields == ["quantity", "S", "email", "unit_price", "XL"]
     assert "XXL" in CORRECTIONS[-1].reason  # the alias entry says which alias
+
+
+def test_file_has_one_customer_mapping():
+    (m,) = MAPPINGS
+    assert (m.id, m.name, m.storefront, m.customer_id) == (
+        "C-006", "Northwind Outfitters", "web-austin", 1,
+    )
+    assert m.reason.strip() and len(ALL) == 6
 
 
 @pytest.mark.parametrize("c", CORRECTIONS, ids=lambda c: c.id)
