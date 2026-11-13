@@ -23,6 +23,7 @@ from urllib.parse import urlparse
 from playwright.sync_api import Page, sync_playwright
 
 from ..orders import DEFAULT_PATH, load_orders
+from .faults import DEFAULT_SEED, FaultInjector
 
 DEFAULT_RUNS_PATH = Path("out/runs.jsonl")
 MODE = "scripted"
@@ -86,8 +87,14 @@ def run_order(
     *,
     variant: str = "baseline",
     runs_path: str | Path = DEFAULT_RUNS_PATH,
+    injector: FaultInjector | None = None,
 ) -> dict:
-    """Enter one order, append its run record to ``runs_path`` and return it."""
+    """Enter one order, append its run record to ``runs_path`` and return it.
+
+    With an injector, the agent may type a faulted copy of the order. The fault
+    goes in the record's ``fault`` field, separate from ``claimed_success``.
+    """
+    entered, fault = injector.apply(order) if injector else (order, None)
     query = "" if variant == "baseline" else f"?variant={variant}"
     steps = _Steps()
     started_at = datetime.now(timezone.utc).isoformat(timespec="seconds")
@@ -95,7 +102,7 @@ def run_order(
     erp_order_id: int | None = None
     error: str | None = None
     try:
-        erp_order_id = _enter_order(page, base_url.rstrip("/"), order, query, steps)
+        erp_order_id = _enter_order(page, base_url.rstrip("/"), entered, query, steps)
     except Exception as exc:  # the agent reports failure; it does not raise
         error = f"{type(exc).__name__}: {exc}".splitlines()[0]
         # The order may exist even though a later step failed.
@@ -108,6 +115,7 @@ def run_order(
         "variant": variant,
         "mode": MODE,
         "claimed_success": error is None,
+        "fault": fault,
         "erp_order_id": erp_order_id,
         "steps_ms": steps.ms,
         "total_ms": round((time.perf_counter() - start) * 1000),
@@ -128,7 +136,10 @@ def run_orders(
     variant: str = "baseline",
     runs_path: str | Path = DEFAULT_RUNS_PATH,
     headless: bool = True,
+    fault_rate: float = 0.0,
+    fault_seed: int = DEFAULT_SEED,
 ) -> list[dict]:
+    injector = FaultInjector(fault_rate, fault_seed) if fault_rate > 0 else None
     records = []
     with sync_playwright() as pw:
         browser = pw.chromium.launch(headless=headless)
@@ -138,7 +149,10 @@ def run_orders(
                 page.set_default_timeout(STEP_TIMEOUT_MS)
                 try:
                     records.append(
-                        run_order(page, base_url, order, variant=variant, runs_path=runs_path)
+                        run_order(
+                            page, base_url, order, variant=variant,
+                            runs_path=runs_path, injector=injector,
+                        )
                     )
                 finally:
                     page.close()
@@ -155,12 +169,21 @@ def main() -> None:
     parser.add_argument("--variant", default="baseline")
     parser.add_argument("--runs", default=str(DEFAULT_RUNS_PATH))
     parser.add_argument("--headed", action="store_true")
+    parser.add_argument("--fault-rate", type=float, default=0.0)
+    parser.add_argument("--fault-seed", type=int, default=DEFAULT_SEED)
     args = parser.parse_args()
     orders = load_orders(args.orders)[: args.limit]
     for rec in run_orders(
-        args.base_url, orders, variant=args.variant, runs_path=args.runs, headless=not args.headed
+        args.base_url,
+        orders,
+        variant=args.variant,
+        runs_path=args.runs,
+        headless=not args.headed,
+        fault_rate=args.fault_rate,
+        fault_seed=args.fault_seed,
     ):
-        print(rec["order_id"], "claimed_success=" + str(rec["claimed_success"]), rec["erp_order_id"])
+        fault = rec["fault"]["type"] if rec["fault"] else "-"
+        print(rec["order_id"], "claimed_success=" + str(rec["claimed_success"]), rec["erp_order_id"], fault)
 
 
 if __name__ == "__main__":
