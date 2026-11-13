@@ -1,0 +1,34 @@
+{# One form field, labelled and named by the active variant. #}
+{% macro field(variant, key, type="text", value="") -%}
+<div class="field">
+  <label for="f-{{ variant.field_name(key) }}">{{ variant.label(key) }}</label>
+  <input id="f-{{ variant.field_name(key) }}" name="{{ variant.field_name(key) }}" type="{{ type }}" value="{{ value }}"
+    {%- if type == "number" %} min="0" step="1"{% endif %}>
+</div>
+{%- endmacro %}
+
+{# Size grid: one integer input per size. #}
+{% macro size_grid(variant, sizes) -%}
+<div class="field">
+  <span>{{ variant.label("size") }}</span>
+  <span class="sizes">
+    {% for size in sizes %}
+    <label>{{ variant.label(size) }}
+      <input name="{{ variant.field_name(size) }}" type="number" min="0" step="1" value="0"></label>
+    {% endfor %}
+  </span>
+</div>
+{%- endmacro %}
+
+{# Primary action and Reset, in the variant's order. #}
+{% macro buttons(variant, primary) -%}
+<div class="buttons">
+  {% if variant.buttons_swapped %}
+  <button type="reset">Reset</button>
+  <button type="submit">{{ primary }}</button>
+  {% else %}
+  <button type="submit">{{ primary }}</button>
+  <button type="reset">Reset</button>
+  {% endif %}
+</div>
+{%- endmacro %}
