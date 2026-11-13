@@ -6,6 +6,11 @@ The output depends only on ``SEED``, so the file is reproducible.
 Source orders are internally consistent (each line's quantity equals the sum
 of its sizes). They are messy in other ways: repeated SKUs, sparse size runs,
 odd totals, and customers whose name matches two ERP customers.
+
+Source-minimal mode (``minimal=True``) models a webstore export that identifies
+the customer by name alone: ``customer`` is ``{"name": ...}`` and the order
+carries a ``storefront`` id instead of the email and city. Everything else is
+the same as the full order with the same id.
 """
 
 from __future__ import annotations
@@ -19,6 +24,7 @@ from .erp.seed import COLORS, CUSTOMERS, PRODUCTS, SIZES
 SEED = 20260101
 ORDER_COUNT = 60
 DEFAULT_PATH = Path("data/orders/orders.json")
+MINIMAL_PATH = Path("data/orders/orders.minimal.json")
 
 # Positions (0-based) forced to use a customer whose name is shared by two ERP
 # customers in different cities. The order carries the city and email.
@@ -32,6 +38,19 @@ _NOTES = ("", "", "", "Gift wrap", "Ship together", "Rush", "Call before deliver
 def _duplicate_name_customers() -> list[tuple[str, str, str]]:
     names = [c[0] for c in CUSTOMERS]
     return [c for c in CUSTOMERS if names.count(c[0]) > 1]
+
+
+def storefront_for(city: str) -> str:
+    """The webstore a customer's orders come from, for example ``web-austin``."""
+    return "web-" + city.lower().replace(" ", "-")
+
+
+def minimize(order: dict) -> dict:
+    """The source-minimal view of a full order: customer name plus storefront."""
+    out = dict(order)
+    out["customer"] = {"name": order["customer"]["name"]}
+    out["storefront"] = storefront_for(order["customer"]["city"])
+    return out
 
 
 def _price(cents: int) -> str:
@@ -76,7 +95,9 @@ def _tags(customer: tuple[str, str, str], lines: list[dict]) -> list[str]:
     return tags
 
 
-def generate_orders(seed: int = SEED, count: int = ORDER_COUNT) -> list[dict]:
+def generate_orders(
+    seed: int = SEED, count: int = ORDER_COUNT, minimal: bool = False
+) -> list[dict]:
     rng = random.Random(seed)
     dup_name = _duplicate_name_customers()
     orders = []
@@ -114,13 +135,13 @@ def generate_orders(seed: int = SEED, count: int = ORDER_COUNT) -> list[dict]:
                 "tags": _tags(customer, lines),
             }
         )
-    return orders
+    return [minimize(o) for o in orders] if minimal else orders
 
 
-def write_orders(path: str | Path = DEFAULT_PATH) -> Path:
+def write_orders(path: str | Path = DEFAULT_PATH, minimal: bool = False) -> Path:
     path = Path(path)
     path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(json.dumps(generate_orders(), indent=2) + "\n", encoding="utf-8")
+    path.write_text(json.dumps(generate_orders(minimal=minimal), indent=2) + "\n", encoding="utf-8")
     return path
 
 
@@ -129,4 +150,11 @@ def load_orders(path: str | Path = DEFAULT_PATH) -> list[dict]:
 
 
 if __name__ == "__main__":
-    print(f"wrote {write_orders()}")
+    import argparse
+
+    ap = argparse.ArgumentParser(description="Write the seeded webstore orders.")
+    ap.add_argument("--minimal", action="store_true", help="source-minimal mode")
+    ap.add_argument("--out", help=f"default {DEFAULT_PATH}, or {MINIMAL_PATH} with --minimal")
+    a = ap.parse_args()
+    target = a.out or (MINIMAL_PATH if a.minimal else DEFAULT_PATH)
+    print(f"wrote {write_orders(target, a.minimal)}")
