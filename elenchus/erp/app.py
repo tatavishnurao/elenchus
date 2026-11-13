@@ -105,7 +105,8 @@ def create_app(db_path: str | Path | None = None) -> FastAPI:
         finally:
             conn.close()
         return render(
-            request, "order.html", status, order=order, lines=lines, products=products
+            request, "order.html", status, order=order, lines=lines,
+            products=products, order_id=order["id"],
         )
 
     @app.get("/", response_class=HTMLResponse)
@@ -132,6 +133,17 @@ def create_app(db_path: str | Path | None = None) -> FastAPI:
         finally:
             conn.close()
         return render(request, "new.html", customers=customers)
+
+    @app.get("/orders/line-form-preview", response_class=HTMLResponse)
+    def line_form_preview(request: Request):
+        """The add-line form with no order behind it, so a drift check can read
+        the form without creating a draft order in the ERP."""
+        conn = connect(path)
+        try:
+            products = conn.execute("SELECT * FROM products ORDER BY sku").fetchall()
+        finally:
+            conn.close()
+        return render(request, "line_form_preview.html", products=products, order_id="ID")
 
     @app.post("/orders")
     async def create_order(request: Request):
