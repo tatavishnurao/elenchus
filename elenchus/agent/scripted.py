@@ -14,6 +14,7 @@ from __future__ import annotations
 import argparse
 import json
 import re
+import sys
 import time
 from contextlib import contextmanager
 from datetime import datetime, timezone
@@ -23,6 +24,7 @@ from urllib.parse import urlparse
 from playwright.sync_api import Page, sync_playwright
 
 from ..orders import DEFAULT_PATH, load_orders
+from ..verify.drift import DEFAULT_BASELINE, DriftBlocked, require_no_drift
 from .faults import DEFAULT_SEED, FaultInjector, format_summary
 
 DEFAULT_RUNS_PATH = Path("out/runs.jsonl")
@@ -138,7 +140,13 @@ def run_orders(
     headless: bool = True,
     fault_rate: float = 0.0,
     fault_seed: int = DEFAULT_SEED,
+    drift_baseline: str | Path | None = None,
 ) -> list[dict]:
+    """Run every order. With ``drift_baseline``, compare the ERP forms against
+    that baseline first and raise ``DriftBlocked`` (before any order is entered)
+    if they changed."""
+    if drift_baseline is not None:
+        require_no_drift(base_url, variant, drift_baseline)
     injector = FaultInjector(fault_rate, fault_seed) if fault_rate > 0 else None
     records = []
     with sync_playwright() as pw:
@@ -171,17 +179,27 @@ def main() -> None:
     parser.add_argument("--headed", action="store_true")
     parser.add_argument("--fault-rate", type=float, default=0.0)
     parser.add_argument("--fault-seed", type=int, default=DEFAULT_SEED)
+    parser.add_argument("--drift-baseline", default=str(DEFAULT_BASELINE))
+    parser.add_argument(
+        "--skip-drift-check", action="store_true",
+        help="run even if the ERP forms differ from the baseline fingerprint",
+    )
     args = parser.parse_args()
     orders = load_orders(args.orders)[: args.limit]
-    records = run_orders(
-        args.base_url,
-        orders,
-        variant=args.variant,
-        runs_path=args.runs,
-        headless=not args.headed,
-        fault_rate=args.fault_rate,
-        fault_seed=args.fault_seed,
-    )
+    try:
+        records = run_orders(
+            args.base_url,
+            orders,
+            variant=args.variant,
+            runs_path=args.runs,
+            headless=not args.headed,
+            fault_rate=args.fault_rate,
+            fault_seed=args.fault_seed,
+            drift_baseline=None if args.skip_drift_check else args.drift_baseline,
+        )
+    except DriftBlocked as blocked:
+        print("run blocked:", blocked.report.format(), sep="\n", file=sys.stderr)
+        raise SystemExit(2) from None
     for rec in records:
         fault = rec["fault"]["type"] if rec["fault"] else "-"
         print(rec["order_id"], "claimed_success=" + str(rec["claimed_success"]), rec["erp_order_id"], fault)
