@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}Orders · Mock ERP{% endblock %}
+{% block content %}
+<h1>Orders</h1>
+<table>
+  <tr><th>#</th><th>{{ variant.label("customer") }}</th><th>{{ variant.label("source_ref") }}</th><th>Status</th></tr>
+  {% for o in orders %}
+  <tr>
+    <td><a href="/orders/{{ o.id }}{{ vq }}">{{ o.id }}</a></td>
+    <td>{{ o.customer_name }} ({{ o.customer_city }})</td>
+    <td>{{ o.source_ref }}</td>
+    <td>{{ o.status }}</td>
+  </tr>
+  {% else %}
+  <tr><td colspan="4">No orders yet.</td></tr>
+  {% endfor %}
+</table>
+{% endblock %}
