@@ -11,6 +11,16 @@ uses the names ``diff_order`` reports; ``lines[*]`` matches any line. Each
 entry compiles into a ``ReplayCheck``. A check hits when the ERP stored the
 known-wrong value for a matching field, and the hit names the correction that
 caught it.
+
+A second kind of entry, ``"kind": "resolve_customer"``, maps a source customer
+name plus storefront to an ERP customer id:
+
+    {"id": "C-006", "kind": "resolve_customer", "name": "Northwind Outfitters",
+     "storefront": "web-austin", "customer_id": 1, "reason": "..."}
+
+In source-minimal mode the diff cannot tell same-name customers apart. A
+mapping resolves that: the order's customer is then checked against the id, and
+a different id is a replay hit.
 """
 
 from __future__ import annotations
@@ -25,6 +35,8 @@ from .diff import norm_text, price_cents, stored_fields
 
 DEFAULT_PATH = Path("data/corrections.jsonl")
 REQUIRED_KEYS = ("id", "order_pattern", "field", "wrong", "right", "reason")
+RESOLVE_KIND = "resolve_customer"
+RESOLVE_KEYS = ("id", "kind", "name", "storefront", "customer_id", "reason")
 
 
 @dataclass(frozen=True)
@@ -34,6 +46,15 @@ class Correction:
     field: str
     wrong: object
     right: object
+    reason: str
+
+
+@dataclass(frozen=True)
+class CustomerMapping:
+    id: str
+    name: str
+    storefront: str
+    customer_id: int
     reason: str
 
 
@@ -51,8 +72,8 @@ class ReplayHit:
         return asdict(self)
 
 
-def load_corrections(path: str | Path = DEFAULT_PATH) -> list[Correction]:
-    out: list[Correction] = []
+def load_corrections(path: str | Path = DEFAULT_PATH) -> list[Correction | CustomerMapping]:
+    out: list[Correction | CustomerMapping] = []
     seen: set[str] = set()
     text = Path(path).read_text(encoding="utf-8")
     for n, line in enumerate(text.splitlines(), start=1):
@@ -62,14 +83,19 @@ def load_corrections(path: str | Path = DEFAULT_PATH) -> list[Correction]:
             raw = json.loads(line)
         except json.JSONDecodeError as exc:
             raise ValueError(f"{path}:{n}: invalid JSON ({exc.msg})") from None
-        missing = [k for k in REQUIRED_KEYS if k not in raw]
-        extra = sorted(set(raw) - set(REQUIRED_KEYS))
+        resolve = raw.get("kind") == RESOLVE_KIND
+        keys = RESOLVE_KEYS if resolve else REQUIRED_KEYS
+        missing = [k for k in keys if k not in raw]
+        extra = sorted(set(raw) - set(keys))
         if missing or extra:
             raise ValueError(f"{path}:{n}: missing keys {missing}, unknown keys {extra}")
         if raw["id"] in seen:
             raise ValueError(f"{path}:{n}: duplicate id {raw['id']!r}")
         seen.add(raw["id"])
-        out.append(Correction(**raw))
+        if resolve:
+            out.append(CustomerMapping(**{k: v for k, v in raw.items() if k != "kind"}))
+        else:
+            out.append(Correction(**raw))
     return out
 
 
@@ -111,18 +137,70 @@ class ReplayCheck:
         ]
 
 
-def compile_corrections(corrections: list[Correction]) -> list[ReplayCheck]:
-    return [ReplayCheck(c, _field_regex(c.field)) for c in corrections]
+@dataclass(frozen=True)
+class MappingCheck:
+    """A name + storefront -> customer id mapping compiled for matching."""
+
+    mapping: CustomerMapping
+
+    def applies_to(self, source: dict | None) -> bool:
+        if not source:
+            return False
+        m = self.mapping
+        return (
+            norm_text(source["customer"]["name"]) == norm_text(m.name)
+            and source.get("storefront") == m.storefront
+        )
+
+    def run(self, record: dict, stored: dict, source: dict | None) -> list[ReplayHit]:
+        m = self.mapping
+        if not self.applies_to(source) or stored["customer.id"] == m.customer_id:
+            return []
+        return [
+            ReplayHit(
+                m.id, record["order_id"], record.get("erp_order_id"),
+                "customer.id", stored["customer.id"], m.customer_id, m.reason,
+            )
+        ]
+
+
+Check = ReplayCheck | MappingCheck
+
+
+def compile_corrections(corrections: list[Correction | CustomerMapping]) -> list[Check]:
+    return [
+        MappingCheck(c) if isinstance(c, CustomerMapping) else ReplayCheck(c, _field_regex(c.field))
+        for c in corrections
+    ]
+
+
+def resolving_check(checks: list[Check], source: dict) -> MappingCheck | None:
+    """The mapping that says which ERP customer this source order is for, if any."""
+    return next((c for c in checks if isinstance(c, MappingCheck) and c.applies_to(source)), None)
 
 
 def replay_run(
-    db_path: str | Path, record: dict, checks: list[ReplayCheck]
+    db_path: str | Path,
+    record: dict,
+    checks: list[Check],
+    source: dict | None = None,
 ) -> list[ReplayHit]:
-    """Every correction that the ERP data for ``record`` repeats."""
-    relevant = [c for c in checks if c.applies_to(record["order_id"])]
+    """Every correction that the ERP data for ``record`` repeats.
+
+    ``source`` is the source order; customer mappings need it (they match on
+    its name and storefront) and are skipped without it.
+    """
+    relevant = [
+        c for c in checks
+        if (c.applies_to(record["order_id"]) if isinstance(c, ReplayCheck) else c.applies_to(source))
+    ]
     if not relevant:
         return []
     stored = stored_fields(db_path, record.get("erp_order_id"))
     if stored is None:
         return []
-    return [hit for check in relevant for hit in check.run(record, stored)]
+    return [
+        hit
+        for c in relevant
+        for hit in (c.run(record, stored) if isinstance(c, ReplayCheck) else c.run(record, stored, source))
+    ]
