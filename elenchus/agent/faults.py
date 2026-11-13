@@ -10,6 +10,8 @@ from __future__ import annotations
 
 import copy
 import random
+import re
+from collections import Counter
 from decimal import Decimal
 
 from ..erp.seed import CUSTOMERS, SIZES
@@ -21,6 +23,9 @@ SWAPPED_SIZES = "swapped_sizes"
 WRONG_CUSTOMER = "wrong_customer"
 STALE_PRICE = "stale_price"
 FAULT_TYPES = (OFF_BY_ONE_QUANTITY, SWAPPED_SIZES, WRONG_CUSTOMER, STALE_PRICE)
+
+
+_GOLDEN = (5**0.5 - 1) / 2
 
 
 def _fault(kind: str, field: str, original, injected) -> dict:
@@ -62,10 +67,30 @@ class FaultInjector:
         self.seed = seed
         self.types = tuple(types)
 
+    def _selected(self, order_id: str, rng: random.Random) -> bool:
+        """Whether this order gets a fault.
+
+        Independent coin flips drift a long way from the rate on a few dozen
+        orders. Instead the numeric part of the id is placed on a golden-ratio
+        sequence (offset by the seed), which spreads evenly over [0, 1), so the
+        realized rate stays within about one order of ``rate``. The result still
+        depends only on (seed, order id), not on run order. Ids with no number
+        fall back to a seeded coin flip.
+        """
+        if self.rate <= 0:
+            return False
+        digits = re.search(r"(\d+)\s*$", order_id)
+        if digits is None:
+            return rng.random() < self.rate
+        offset = random.Random(f"offset:{self.seed}").random()
+        return (offset + int(digits.group(1)) * _GOLDEN) % 1.0 < self.rate
+
     def apply(self, order: dict) -> tuple[dict, dict | None]:
         rng = random.Random(f"{self.seed}:{order['id']}")
-        if self.rate <= 0 or rng.random() >= self.rate:
+        if not self._selected(str(order["id"]), rng):
             return order, None
+        # Redraw from the types that can apply to this order (for example,
+        # wrong_customer needs a customer name shared by two ERP records).
         applicable = [t for t in self.types if self._applicable(t, order)]
         if not applicable:
             return order, None
@@ -110,3 +135,23 @@ class FaultInjector:
         original = line["unit_price"]
         line["unit_price"] = _stale(original)
         return _fault(STALE_PRICE, f"lines[{i + 1}].unit_price", original, line["unit_price"])
+
+
+def summarize(records: list[dict]) -> dict:
+    """Actual faulted count and per-type counts over run records."""
+    by_type = Counter(r["fault"]["type"] for r in records if r.get("fault"))
+    return {
+        "total": len(records),
+        "faulted": sum(by_type.values()),
+        "by_type": {t: by_type.get(t, 0) for t in FAULT_TYPES},
+    }
+
+
+def format_summary(records: list[dict], rate: float) -> str:
+    s = summarize(records)
+    pct = 100 * s["faulted"] / s["total"] if s["total"] else 0.0
+    types = ", ".join(f"{t}={n}" for t, n in s["by_type"].items())
+    return (
+        f"faults: {s['faulted']}/{s['total']} orders faulted ({pct:.1f}%, "
+        f"target {100 * rate:.1f}%); by type: {types}"
+    )
