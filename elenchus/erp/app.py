@@ -76,7 +76,7 @@ def create_app(db_path: str | Path | None = None) -> FastAPI:
         ctx.update(
             variant=variant,
             variants=VARIANTS,
-            vq="" if variant.name == "baseline" else f"?variant={quote(variant.name)}",
+            vq=_vq(variant),
             sizes=SIZES,
             colors=COLORS,
         )
