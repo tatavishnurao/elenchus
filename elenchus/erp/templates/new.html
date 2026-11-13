@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% import "macros.html" as m %}
+{% block title %}New order · Mock ERP{% endblock %}
+{% block content %}
+<h1>New order</h1>
+<form method="post" action="/orders{{ vq }}">
+  {% for key in variant.header_order %}
+    {% if key == "customer" %}
+      <div class="field">
+        <label for="f-{{ variant.field_name('customer') }}">{{ variant.label("customer") }}</label>
+        <select id="f-{{ variant.field_name('customer') }}" name="{{ variant.field_name('customer') }}">
+          <option value="">--</option>
+          {% for c in customers %}<option value="{{ c.id }}">{{ c.name }} ({{ c.city }})</option>{% endfor %}
+        </select>
+      </div>
+    {% else %}
+      {{ m.field(variant, key) }}
+    {% endif %}
+  {% endfor %}
+  {{ m.buttons(variant, "Create order") }}
+</form>
+{% endblock %}
